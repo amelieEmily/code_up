@@ -28,6 +28,19 @@
     <link rel="stylesheet" href="codemirror/theme/crystal.css">
     <script src="codemirror/mode/python/python.js"></script> -->
 
+    <!-- EasyRTC -->
+    <link rel="stylesheet" type="text/css" href="../css/easyrtc.css" />
+
+    <!--hide-->
+    <!-- <link rel="stylesheet" type="text/css" href="css/landing.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../css/demo_audio_video_simple.css" />
+
+    <!--show-->
+    <!-- Assumes global locations for socket.io.js and easyrtc.js -->
+    <script src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../js/easyrtc.js"></script>
+    <script type="text/javascript" src="../js/demo_audio_video_simple.js"></script>
+
     <title>CodeUp</title>
     <!-- <script type="text/javascript" charset="utf-8">
       $(function() {
@@ -65,8 +78,34 @@
           </div><!-- /.container-fluid -->
       </nav>
 
+      <div id="container">
+          <div id="main">
+              <!--show-->
+              <div id="demoContainer">
+                  <div id="connectControls">
+                      <div id="iam">Not yet connected...</div>
+                      <br />
+                      <strong>Connected users:</strong>
+                      <div id="otherClients"></div>
+                  </div>
+                  <div id="videos">
+                      <video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
+                      <div style="position:relative;float:left;">
+                      <video autoplay="autoplay" id="callerVideo"></video>
+                      </div>
+                      <!-- each caller video needs to be in it's own div so it's close button can be positioned correctly -->
+                  </div>
+              </div>
+              <!--hide-->
+              <br style="clear:both;" />
+              <hr />
+              <!-- End Main Content -->
+          </div>
+      </div>
+
+
       <div class="row" id="firepad-container">
-      <div class="column" id="firepad-container1">
+        <div class="column" id="firepad-container1">
         <h3>Tutee</h3>
         <select id="select-tutee">
           <option value="C">C</option>
@@ -75,7 +114,7 @@
           <option value="Python">Python</option>
         </select>
       </div>
-      <div class="column" id="firepad-container2">
+        <div class="column" id="firepad-container2">
         <h3>Tutor</h3>
         <select id="select-tutor">
           <option value="C">C</option>
@@ -235,6 +274,7 @@
         function init() {
           init1();
           init2();
+          connect();
         }
       </script>
 
