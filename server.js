@@ -63,6 +63,7 @@ app.post('/login', function(req, res){
     const query = "SELECT DISTINCT id, password FROM users WHERE id = '" + req.body.username + "'";
 
     pool.query(query, (accessErr, accessResult) => {
+      console.log(accessErr);
         // If username is not in database ...
         if (accessResult.rowCount == 0) {
             // ... Reload login page
@@ -87,8 +88,13 @@ app.post('/login', function(req, res){
 });
 
 app.post('/tutorList', function(req, res) {
-  const listQuery = "SELECT * FROM tutorlist";
+  console.log(req.body.type);
+  const listQuery = "SELECT * FROM tutorlist ORDER BY " + req.body.type;
   pool.query(listQuery, (listErr, listResult) => {
+    var count = listResult.rowCount;
+    for (var i = 0; i < count; i++) {
+      console.log(listResult.rows[i].first_name);
+    }
     res.render('pages/tutorList', {
         username: req.body.username,
         tutors: listResult.rows
