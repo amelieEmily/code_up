@@ -102,21 +102,6 @@ app.post('/tutorList', function(req, res) {
   });
 });
 
-app.get('/tutorList', function(req, res) {
-  console.log(req.body.type);
-  const listQuery = "SELECT * FROM tutorlist ORDER BY " + req.body.type;
-  pool.query(listQuery, (listErr, listResult) => {
-    var count = listResult.rowCount;
-    for (var i = 0; i < count; i++) {
-      console.log(listResult.rows[i].first_name);
-    }
-    res.render('pages/tutorList', {
-        username: req.body.username,
-        tutors: listResult.rows
-    });
-  });
-});
-
 // When "Sign Up" button is clicked ...
 app.get('/signup', function(req, res) {
     res.sendFile(html_dir + 'signup.html');
