@@ -10,7 +10,7 @@ $('#input-sort').on('change', function(event) {
 
     $.ajax({
        url: "/tutorList",
-       type: "post",
+       type: "get",
        data: data,
        dataType: "json",
        async: true,
