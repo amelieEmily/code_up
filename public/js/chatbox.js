@@ -65,6 +65,7 @@ $(document).ready(function() {
     for (var i = 0; i < data.length; i++) {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
+      $("#" + user).find('button').text('Contact(Online)');
     }
   });
 
@@ -102,11 +103,12 @@ $(document).ready(function() {
 
   socket.on('user_disconnected', function(data) {
     $('.contact').each(function() {
-      $(this).addClass('disabled');
+      // $(this).addClass('disabled');
     });
     for (var i = 0; i < data.length; i++) {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
+      $("#" + user).find('button').text('Contact(Offline)');
     }
   })
 

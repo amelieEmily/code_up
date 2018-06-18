@@ -21,6 +21,10 @@ h1 {
   padding: 0;
 }
 
+.code-form button {
+  margin-left: 60px;
+}
+
 :-webkit-autofill {
   color: #fff !important;
 }
