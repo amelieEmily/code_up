@@ -9,7 +9,7 @@ $(document).ready(function() {
   socket.emit('to server', {
     from: $('#username').text(),
     to: $('#tutorID').text(),
-    msg: "Please Code with me: <a href='" + link + "''>" + link + "</a>"
+    msg: "Please Code with me: <a href='" + link + "'>" + link + "</a>"
   });
 });
 
