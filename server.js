@@ -269,10 +269,12 @@ io.sockets.on('connection', function(socket) {
         console.log(error);
       }
       var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      let msg = data.msg.replace(/[']/g, "'$&");
+      console.log(msg);
       let query = "INSERT INTO chattest VALUES (";
         query += "'" + data.to + "', ";
         query += "'" + data.from + "', ";
-        query += "'" + data.msg + "', ";
+        query += "'" + msg + "', ";
         query += "'" + date  + "')";
         pool.query(query, (err, result) => {
             console.log(err);
