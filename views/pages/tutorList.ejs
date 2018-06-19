@@ -121,13 +121,13 @@
                                     <span>£<%= tutor.rate_per_hour %>/hour</span>
                                 </div>
                                 <div class="contactAndCodeup">
-                                  <div class ="col-sm-1 nopadding">
+                                  <div class ="col-sm-4 nopadding">
                                     <div id="<%= tutor.id %>">
                                         <span style="display:none"><%= tutor.first_name %> <%= tutor.last_name %></span>
-                                        <button type="button" class="btn contact btn-success">Contact(Offline)</button>
+                                        <button type="button" class="btn contact btn-success">Message Him/Her(Currently Offline)</button>
                                     </div>
                                   </div>
-                                  <div class ="col-sm-3">
+                                  <div class ="col-sm-2">
                                     <form id="code_form<%= tutor.id %>" class="code-form" action="/code" method="GET">
                                         <input type="hidden" name="username" value=<%= username %> />
                                         <input type="hidden" name="tutorID" value="<%= tutor.id %>"/>
@@ -137,6 +137,11 @@
                                   <div class="socialMediaContacts">
                                     <a href="http://m.me/<%= tutor.facebook %>"><i class="fa fa-facebook"></i></a>
                                     <a href="skype:<%= tutor.skype_id %>?call"><i class="fa fa-skype"></i></a>
+                                    <span class="fa-stack fa-lg">
+                                      <a href="mailto:<%= tutor.id %>"><i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                      <i class="fa fa-envelope fa-stack-1x"></i>
+                                    </span>
+                                    <!-- <a href="mailto:<%= tutor.id %>"><i class="fa fa-envelope fa-stack-2x icon-background"></i></a> -->
                                   </div>
                                 </div>
                               </div>
