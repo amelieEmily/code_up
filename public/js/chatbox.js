@@ -30,10 +30,6 @@ $(document).ready(function() {
       }
 
       addChatBox(userID);
-      socket.emit('chatbox clicked', {
-        user: $('#username').text(),
-        to: userID
-      });
     }
   });
 
@@ -65,7 +61,7 @@ $(document).ready(function() {
     for (var i = 0; i < data.length; i++) {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
-      $("#" + user).find('button').text('Message Him/Her(Currently Online)');
+      $("#" + user).find('button').text('Message(Currently Online)');
     }
   });
 
@@ -74,10 +70,6 @@ $(document).ready(function() {
     let userID = data.from
     if (!$('div[rel="' + userID + '"]').length) {
       addChatBox(userID);
-      socket.emit('chatbox clicked', {
-        user: $('#username').text(),
-        to: userID
-      });
     }
     $('<div class="msg-left">' + data.msg + '</div>').insertBefore('[rel="' + userID + '"] .msg_push');
     // Autoscroll to bottom of chat
@@ -110,7 +102,7 @@ $(document).ready(function() {
     for (var i = 0; i < data.length; i++) {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
-      $("#" + user).find('button').text('Message Him/Her(Currently Offline)');
+      $("#" + user).find('button').text('Message(Currently Offline)');
     }
   })
 
@@ -135,12 +127,10 @@ $(document).ready(function() {
     var data = {
       user: userID
     };
-    console.log(JSON.stringify(data));
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
         chatPopup = '<div class="msg_box" style="right:270px" rel="' + userID + '">' +
         '<div class="msg_head">' + this.responseText +
         '<div class="close">x</div> </div>' +
@@ -149,8 +139,10 @@ $(document).ready(function() {
 
         $("body").append(chatPopup);
         displayChatBox();
-      } else {
-        console.log("error in get_user_name");
+        socket.emit('chatbox clicked', {
+          user: $('#username').text(),
+          to: userID
+        });
       }
     };
     xhttp.open("POST", "/get_user_name", true);
