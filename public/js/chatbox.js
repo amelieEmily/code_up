@@ -65,7 +65,7 @@ $(document).ready(function() {
     for (var i = 0; i < data.length; i++) {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
-      $("#" + user).find('button').text('Contact(Online)');
+      $("#" + user).find('button').text('Message Him/Her(Currently Online)');
     }
   });
 
@@ -108,7 +108,7 @@ $(document).ready(function() {
     for (var i = 0; i < data.length; i++) {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
-      $("#" + user).find('button').text('Contact(Offline)');
+      $("#" + user).find('button').text('Message Him/Her(Currently Offline)');
     }
   })
 

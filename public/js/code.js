@@ -71,6 +71,7 @@ function init1() {
 
   myBtn1.addEventListener('click', function(event) {
     console.log('clicked');
+    document.getElementById("output-box1").value = "Processing your request...";
 
     var e = document.getElementById("select-tutee");
     console.log(e.options[e.selectedIndex].value);
@@ -189,6 +190,7 @@ function init2() {
 
   myBtn2.addEventListener('click', function(event) {
     console.log('clicked');
+    document.getElementById("output-box2").value = "Processing your request...";
 
     var e = document.getElementById("select-tutor");
     console.log(e.options[e.selectedIndex].value);
