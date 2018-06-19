@@ -74,6 +74,10 @@ $(document).ready(function() {
     let userID = data.from
     if (!$('div[rel="' + userID + '"]').length) {
       addChatBox(userID);
+      socket.emit('chatbox clicked', {
+        user: $('#username').text(),
+        to: userID
+      });
     }
     $('<div class="msg-left">' + data.msg + '</div>').insertBefore('[rel="' + userID + '"] .msg_push');
     // Autoscroll to bottom of chat
@@ -85,14 +89,12 @@ $(document).ready(function() {
   socket.on('display history', function(data) {
     let userID = data.user;
     if (data.pos == 'left') {
-      console.log(data.msg);
       $('<div class="msg-left">' + data.msg + '</div>').insertBefore('[rel="' + userID + '"] .msg_push');
       // Autoscroll to bottom of chat
       $(".msg_body").animate({
         scrollTop: $(".msg_body")[0].scrollHeight
       }, 100);
     } else if (data.pos == 'right') {
-      console.log(data.msg);
       $('<div class="msg-right">' + data.msg + '</div>').insertBefore('[rel="' + userID + '"] .msg_push');
       // Autoscroll to bottom of chat
       $(".msg_body").animate({
@@ -130,13 +132,29 @@ $(document).ready(function() {
 
   function addChatBox(userID) {
     arr.unshift(userID);
-    chatPopup = '<div class="msg_box" style="right:270px" rel="' + userID + '">' +
-      '<div class="msg_head">' + userID +
-      '<div class="close">x</div> </div>' +
-      '<div class="msg_wrap"> <div class="msg_body">	<div class="msg_push"></div> </div>' +
-      '<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div> </div> </div>';
+    var data = {
+      user: userID
+    };
+    console.log(JSON.stringify(data));
 
-    $("body").append(chatPopup);
-    displayChatBox();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+        chatPopup = '<div class="msg_box" style="right:270px" rel="' + userID + '">' +
+        '<div class="msg_head">' + this.responseText +
+        '<div class="close">x</div> </div>' +
+        '<div class="msg_wrap"> <div class="msg_body">	<div class="msg_push"></div> </div>' +
+        '<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div> </div> </div>';
+
+        $("body").append(chatPopup);
+        displayChatBox();
+      } else {
+        console.log("error in get_user_name");
+      }
+    };
+    xhttp.open("POST", "/get_user_name", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify(data));
   }
 });

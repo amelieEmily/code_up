@@ -174,9 +174,16 @@ app.post('/submit_review', function(req, res) {
       pool.query(update_rating_query, (error, res) => {});
     });
   });
+});
 
-
-
+app.post('/get_user_name', function(req, res) {
+  let query = "SELECT * FROM users WHERE id="
+  query += "'" + req.body.user + "'";
+  pool.query(query, (err, result) => {
+    console.log(err);
+    var name = result.rows[0].first_name + " " + result.rows[0].last_name;
+    res.send(name);
+  });
 });
 
 //When "Code Up!" button is clicked ...
@@ -258,7 +265,6 @@ io.sockets.on('connection', function(socket) {
             var replacer = "username=" + arrfrom[0];
             var newmsg = msg.replace(tobereplace, replacer);
             newmsg = newmsg.replace(tobereplace, replacer);
-            console.log(newmsg);
             users[data.user].emit('display history', {
               user: data.to,
               pos: 'right',
