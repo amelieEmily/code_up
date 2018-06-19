@@ -265,27 +265,39 @@ io.sockets.on('connection', function(socket) {
             var replacer = "username=" + arrfrom[0];
             var newmsg = msg.replace(tobereplace, replacer);
             newmsg = newmsg.replace(tobereplace, replacer);
-            users[data.user].emit('display history', {
-              user: data.to,
-              pos: 'right',
-              msg: newmsg
-            });
+            try {
+              users[data.user].emit('display history', {
+                user: data.to,
+                pos: 'right',
+                msg: newmsg
+              });
+            }  catch (error) {
+              console.log(error);
+            }
           } else {
-            users[data.user].emit('display history', {
-              user: data.to,
-              pos: 'right',
-              msg: msg
-            });
+            try {
+              users[data.user].emit('display history', {
+                user: data.to,
+                pos: 'right',
+                msg: msg
+              });
+            }  catch (error) {
+              console.log(error);
+            }
           }
         }
         //msg from clicked user
         else if (accessResult.rows[i].fromuser === data.to &&
           accessResult.rows[i].touser === data.user) {
-          users[data.user].emit('display history', {
+          try {
+            users[data.user].emit('display history', {
             user: data.to,
             pos: 'left',
             msg: accessResult.rows[i].msg
-          });
+            });
+          }  catch (error) {
+            console.log(error);
+          }
         }
       }
     });

@@ -103,6 +103,7 @@ $(document).ready(function() {
       let user = data[i].replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
       $("#" + user).find('button').removeClass('disabled');
       $("#" + user).find('button').text('Message(Currently Offline)');
+      $("#" + user).find('online_status').text('Currently Offline');
     }
   })
 
