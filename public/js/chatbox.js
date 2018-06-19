@@ -21,7 +21,7 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.contact', function() {
-    if (!$(this).hasClass("disabled")) {
+    // if (!$(this).hasClass("disabled")) {
       var userID = $(this).parent().attr("id");
       //var username = $(this).prev().text() ;
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
       }
 
       addChatBox(userID);
-    }
+    // }
   });
 
 
