@@ -17,6 +17,9 @@
   canvas.addEventListener('mouseout', onMouseUp, false);
   canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
 
+  var clear_button = document.getElementById('clear');
+  clear_button.addEventListener('click', clearWhiteboard);
+
   for (var i = 0; i < colors.length; i++) {
     colors[i].addEventListener('click', onColorUpdate, false);
   }
@@ -25,6 +28,10 @@
 
   window.addEventListener('resize', onResize, false);
   onResize();
+
+  function clearWhiteboard() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
 
 
   function drawLine(x0, y0, x1, y1, color, emit) {

@@ -202,6 +202,11 @@ body {
   background-color: yellow;
 }
 
+#clear {
+  position: fixed;
+  margin-left: 10px;
+}
+
 .navbar {
   margin-bottom: 0px;
 }
